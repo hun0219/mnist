@@ -4,6 +4,7 @@ from fastapi import FastAPI, File, UploadFile
 import os
 import datetime
 import pymysql.cursors
+import pytz
 
 app = FastAPI()
 
@@ -20,7 +21,7 @@ async def create_upload_file(file: UploadFile):
     file_name = file.filename
     # 파일 확장자 받을 수 있음.
     file_ext = file.content_type.split('/')[-1]
-    rt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    #rt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     # 디렉토리 없으면 오류, 코드에서 확인 및 만들기 추가
     upload_dir = "/home/hun/code/mnist/img"
@@ -55,9 +56,12 @@ async def create_upload_file(file: UploadFile):
 
     sql = "INSERT INTO image_processing(`request_user`, `file_name`, `file_path`, `request_time`) VALUES (%s, %s, %s, %s)"
 
+    #https://pypi.org/project/pytz/ 'Asia/Seoul'
+    from nowtime.main import now
+
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute(sql, ('n08', file_name, file_full_path, rt))
+            cursor.execute(sql, ('n08', file_name, file_full_path, now()))
         connection.commit()
 
 
