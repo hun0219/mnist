@@ -8,7 +8,6 @@ import pytz
 
 app = FastAPI()
 
-
 @app.post("/files/")
 async def create_file(file: Annotated[bytes, File()]):
     return {"file_size": len(file)}
@@ -70,3 +69,38 @@ async def create_upload_file(file: UploadFile):
             "content_type": file.content_type,
             "file_full_path": file_full_path
             }
+
+
+@app.get("/all/")
+def all():
+    # DB 연결 SELECT ALL
+    # 결과값 리턴
+    from mnist.db import select 
+    sql = "SELECT * FROM image_processing"
+    result = select(query=sql, size = -1)
+    
+    return result
+
+@app.get("/one/")
+def one():
+    # DB 연결 SELECT 값 중 하나만 리턴
+    # 결과값 리턴
+    from mnist.db import select
+    sql = """SELECT * FROM image_processing 
+    WHERE prediction_time IS NULL ORDER BY num LIMIT 1"""
+    result = select(query=sql, size = 1)
+
+    return result[0]
+
+
+@app.get("/many/")
+def many(size: int = -1):
+    from mnist.db import get_connection
+    sql = "SELECT * FROM image_processing WHERE prediction_time IS NULL ORDER BY num"
+    conn = get_connection()
+    with conn:
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            result = cursor.fetchmany(size)
+
+    return result
