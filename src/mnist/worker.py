@@ -1,6 +1,8 @@
 import nowtime.main
 from mnist.db import get_connection, select, dml
 import random
+import requests
+import os
 
 def get_job_img_task():
     """image_processing 테이블을 읽어서 가장 오래된 요청 하나씩을 처리"""
@@ -66,3 +68,21 @@ def run():
     # LINE 으로 처리 결과 전송
 
     print(nowtime.main.now())
+
+    send_line_noti(file_name, presult)
+
+def send_line_noti(file_name, presult):
+    api_url = "https://notify-api.line.me/api/notify"
+    token = os.getenv('LINE_NOTI_TOKEN', 'NULL')
+    headers = {'Authorization':'Bearer '+token}
+    print(token)
+    message = {
+            "message": f"{file_name} => {presult}"
+    }
+
+    resp = requests.post(api_url, headers=headers, data=message)
+    
+    print(resp.text)
+
+    print("SEND LINE NOTI")
+    
