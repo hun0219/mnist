@@ -46,7 +46,7 @@ async def create_upload_file(file: UploadFile):
     # 컬럼 정보 : 파일이름, 파일경로, 요청시간(초기 insert), 요청사용자(n08)
     # 컬럼 정보 : 예측모델, 예측결과, 예측시간(추후 업데이트)
     
-    connection = pymysql.connect(host=os.getenv("DB_IP", "localhost"),
+    connection = pymysql.connect(host=os.getenv("DB_IP", "172.17.0.1"),
                              user='mnist',
                              password='1234',
                              port = int(os.getenv("MY_PORT", "53306")),
