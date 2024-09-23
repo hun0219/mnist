@@ -3,7 +3,7 @@ import os
 
 
 def get_connection():
-    connection = pymysql.connect(host=os.getenv("DB_IP", "localhost"),
+    connection = pymysql.connect(host=os.getenv("DB_IP", "172.17.0.1"),
                             user='mnist',
                             password='1234',
                             port = int(os.getenv("MY_PORT", "53306")),
