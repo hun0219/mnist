@@ -10,7 +10,7 @@ RUN crontab /etc/cron.d/ml-work-cronjob
 COPY src/mnist/main.py /code/
 COPY run.sh /code/run.sh
 
-RUN pip install --no-cache-dir --upgrade git+https://github.com/hun0219/mnist.git@0.1.0
+RUN pip install --no-cache-dir --upgrade git+https://github.com/hun0219/mnist.git@0.4.0
 
 CMD ["sh", "run.sh"]
 #CMD ["uvicorn", "src.fishmlserv.main:app", "--host", "0.0.0.0", "--port", "8080"]
