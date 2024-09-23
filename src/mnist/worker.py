@@ -1,4 +1,4 @@
-import jigeum.seoul
+import nowtime.main
 
 def run():
   """image_processing 테이블을 읽어서 가장 오래된 요청 하나씩을 처리"""
@@ -13,4 +13,4 @@ def run():
   # STEP 3
   # LINE 으로 처리 결과 전송
 
-  print(jigeum.seoul.now())
+  print(nowtime.main.now())
