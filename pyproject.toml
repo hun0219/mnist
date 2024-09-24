@@ -1,6 +1,6 @@
 [project]
 name = "mnist"
-version = "0.4.0"
+version = "0.5.0"
 description = "MNIST"
 authors = [
     {name = "hun0219", email = "gsw98000@gmail.com"},
@@ -12,6 +12,15 @@ dependencies = [
     "nowtime>=0.1.2",
     "python-multipart>=0.0.10",
     "requests>=2.32.3",
+    "pytz>=2024.2",
+    "tensorflow>=2.17.0",
+    "keras>=3.5.0",
+    "matplotlib>=3.9.2",
+    "scikit-learn>=1.5.2",
+    "scikit-image>=0.24.0",
+    "opencv-python>=4.10.0.84",
+    "pydot>=3.0.1",
+    "pillow>=10.4.0",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
@@ -28,7 +37,9 @@ distribution = true
 [tool.pdm.dev-dependencies]
 test = [
     "pytest>=8.3.3",
+    "notebook>=7.2.2",
 ]
+
 [tool.pytest.ini_options]
 pythonpath = "src"
 
