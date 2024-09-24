@@ -4,7 +4,7 @@ from keras.models import load_model
 import os
 
 # 모델 로드
-model = load_model("mnist240924.keras")  # 학습된 모델 파일 경로
+model = load_model("/home/hun/code/mnist/note/mnist240924.keras")  # 학습된 모델 파일 경로
 
 # 사용자 이미지 불러오기 및 전처리
 def preprocess_image(image_path):
@@ -27,11 +27,11 @@ def predict_digit(image_path):
     return digit
 
 # 사용자 이미지 경로
-image_path = '/home/hun/code/mnist/note/train_img/'
+#image_path = '/home/hun/code/mnist/note/001.png'
 
 # 예측 실행
-predicted_digit = predict_digit(image_path)
-print("예측된 숫자:", predicted_digit)
+#predicted_digit = predict_digit(image_path)
+#print("예측된 숫자:", predicted_digit)
 
 # 예측
 # p = predict_digit('train_img/0_1.png')

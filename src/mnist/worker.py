@@ -3,6 +3,8 @@ from mnist.db import get_connection, select, dml
 import random
 import requests
 import os
+from mnist.model import predict_digit
+
 
 def get_job_img_task():
     """image_processing 테이블을 읽어서 가장 오래된 요청 하나씩을 처리"""
@@ -44,11 +46,10 @@ def prediction(file_path, num):
         prediction_time=%s
     WHERE num=%s
     """
-    from mnist.model import predict_digit
-    presult = predict_digit(image_path)
-    img_model_path = '/home/hun/code/mnist/note/train_img/'
+    presult = predict_digit(file_path)
+    img_model_path = 'mnist240924.keras'
     dml(sql, presult, img_model_path, nowtime.main.now(), num)
-
+    print("예측된 숫자:", presult)
     return presult
 
 def run():
