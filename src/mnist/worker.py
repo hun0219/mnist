@@ -40,12 +40,13 @@ def prediction(file_path, num):
     sql="""
     UPDATE image_processing
     SET prediction_result=%s, 
-        prediction_model='n08',
+        prediction_model='%s',
         prediction_time=%s
     WHERE num=%s
     """
     presult = random.randint(0,9)
-    dml(sql, presult, nowtime.main.now(), num)
+    img_model = /home/hun/code/mnist/note/train_img/
+    dml(sql, presult, img_model, nowtime.main.now(), num)
 
     return presult
 
