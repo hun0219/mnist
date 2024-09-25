@@ -1,5 +1,4 @@
 from typing import Annotated
-
 from fastapi import FastAPI, File, UploadFile
 import os
 import datetime
@@ -18,6 +17,8 @@ async def create_upload_file(file: UploadFile):
     # 파일 저장
     img = await file.read()
     file_name = file.filename
+    label = file_name[0]
+
     # 파일 확장자 받을 수 있음.
     file_ext = file.content_type.split('/')[-1]
     #rt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -53,14 +54,14 @@ async def create_upload_file(file: UploadFile):
                              database='mnistdb',
                              cursorclass=pymysql.cursors.DictCursor)
 
-    sql = "INSERT INTO image_processing(`request_user`, `file_name`, `file_path`, `request_time`) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO image_processing(`request_user`, `label`, `file_name`, `file_path`, `request_time`) VALUES (%s, %s, %s, %s, %s)"
 
     #https://pypi.org/project/pytz/ 'Asia/Seoul'
     from nowtime.main import now
 
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute(sql, ('n08', file_name, file_full_path, now()))
+            cursor.execute(sql, ('n08', label, file_name, file_full_path, now()))
         connection.commit()
 
 
