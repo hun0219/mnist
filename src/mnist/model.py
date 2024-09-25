@@ -4,7 +4,7 @@ from keras.models import load_model
 import os
 
 # 모델 로드
-model_path=os.path.dirname(os.path.abspath(_file))
+model_path=os.path.dirname(os.path.abspath(__file__))
 model = load_model(f'{model_path}/model/mnist240924.keras')
 #model = load_model("/home/hun/code/mnist/note/mnist240924.keras")  # 학습된 모델 파일 경로
 
