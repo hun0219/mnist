@@ -1,12 +1,19 @@
 [project]
 name = "mnist"
-version = "0.1.0"
-description = "Default template for PDM package"
+version = "0.4.0"
+description = "MNIST"
 authors = [
     {name = "hun0219", email = "gsw98000@gmail.com"},
 ]
-dependencies = []
-requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.114.1",
+    "uvicorn[standard]>=0.30.6",
+    "PyMySQL>=1.1.1",
+    "nowtime>=0.1.2",
+    "python-multipart>=0.0.10",
+    "requests>=2.32.3",
+]
+requires-python = "==3.11.*"
 readme = "README.md"
 license = {text = "MIT"}
 
@@ -17,3 +24,13 @@ build-backend = "pdm.backend"
 
 [tool.pdm]
 distribution = true
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=8.3.3",
+]
+[tool.pytest.ini_options]
+pythonpath = "src"
+
+[project.scripts]
+ml-worker = 'mnist.worker:run'

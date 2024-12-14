@@ -1,0 +1,20 @@
+[project]
+name = "nowtime"
+version = "0.1.4"
+description = "Default template for PDM package"
+authors = [
+    {name = "hun0219", email = "gsw98000@gmail.com"},
+]
+dependencies = [
+    "pytz>=2024.2",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = true
+
+[tool.setuptools]
+package-dir = {"" = "src"}
